@@ -5,12 +5,22 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email":"saad@xord.com",
+    "email":"osama@xord.com",
+    "password":"saad1"
+}
+###Sign In User
+
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email":"osama@xord.com",
     "password":"saad1"
 }
 
+
 ###Get a particular User
-GET http://localhost:3000/auth/3
+GET http://localhost:3000/auth/5
 
 ###Find All Users
 
@@ -21,9 +31,9 @@ GET http://localhost:3000/auth?email=saad@xord.com
 DELETE http://localhost:3000/auth/4
 
 ###UpdateUsers
-PATCH http://localhost:3000/auth/
+PATCH http://localhost:3000/auth/2
 Content-Type: application/json
 
 {
-    "email":"qadir@xord.com"
+    "email":"saad@xord.com"
 }
