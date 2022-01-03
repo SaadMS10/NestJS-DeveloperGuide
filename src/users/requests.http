@@ -6,9 +6,24 @@ Content-Type: application/json
 
 {
     "email":"saad@xord.com",
-    "password":"saad"
+    "password":"saad1"
 }
 
-###Get a particular message
-GET http://localhost:3000/messages/100
+###Get a particular User
+GET http://localhost:3000/auth/3
 
+###Find All Users
+
+
+GET http://localhost:3000/auth?email=saad@xord.com
+
+###DELETE USERS
+DELETE http://localhost:3000/auth/4
+
+###UpdateUsers
+PATCH http://localhost:3000/auth/
+Content-Type: application/json
+
+{
+    "email":"qadir@xord.com"
+}
