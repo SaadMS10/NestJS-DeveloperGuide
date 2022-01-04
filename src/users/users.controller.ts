@@ -8,25 +8,51 @@ import {
   Delete,
   Body,
   NotFoundException,
-  UseInterceptors,
+  Session,
+  UseGuards,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UpdateUserDto } from 'src/dtos/update-user-dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 import {
   SerializerInterceptor,
   Serialize,
 } from '../interceptors/serialize.interceptor';
 import { UserDto } from 'src/dtos/user-dto';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptors';
+import { User } from './user.entity';
+import { AuthGuard } from 'src/guards/auth.guards';
 @Controller('auth')
-@Serialize(UserDto) //custom interceptors and decorators
+@Serialize(UserDto) //custom interceptors
 export class UsersController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
   ) {}
+  @Post('/signup')
+  async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signup(body.email, body.password);
+    session.userId = user.id;
+    return user;
+  }
+  @Post('/signin')
+  async signin(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signin(body.email, body.password);
+    session.userId = user.id;
+    return user;
+  }
+  @Get('/whoami')
+  @UseGuards(AuthGuard)
+  whoAmI(@CurrentUser() user: User) {
+    return user;
+  }
+  @Post('/signout')
+  signOut(@Session() session: any) {
+    session.userId = null;
+  }
 
   @Get('/:id')
   findUser(@Param('id') id: string) {
@@ -52,12 +78,13 @@ export class UsersController {
   removeUser(@Param('id') id: string) {
     return this.usersService.remove(parseInt(id));
   }
-  @Post('/signup')
-  createUser(@Body() body: CreateUserDto) {
-    return this.authService.signup(body.email, body.password);
+
+  @Get('/colors/:color')
+  setColor(@Param('color') color: string, @Session() session: any) {
+    session.color = color;
   }
-  @Post('/signin')
-  signin(@Body() body: CreateUserDto) {
-    return this.authService.signin(body.email, body.password);
+  @Get('/colors')
+  getColor(@Session() session: any) {
+    return session.color;
   }
 }

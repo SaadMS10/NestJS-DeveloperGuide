@@ -37,3 +37,6 @@ Content-Type: application/json
 {
     "email":"saad@xord.com"
 }
+
+###Set The Color
+GET http://localhost:3000/colors/red
