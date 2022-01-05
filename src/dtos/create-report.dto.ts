@@ -16,6 +16,8 @@ export class CreateReportDto {
   price: number;
 
   @IsNumber()
+  @Min(1930)
+  @Max(2050)
   year: number;
 
   @IsNumber()
@@ -25,5 +27,7 @@ export class CreateReportDto {
   lat: number;
 
   @IsNumber()
+  @Min(0)
+  @Max(1000000)
   mileage: number;
 }

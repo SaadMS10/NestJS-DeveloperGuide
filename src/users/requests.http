@@ -5,7 +5,7 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email":"osama@xord.com",
+    "email":"saa@xord.com",
     "password":"saad1"
 }
 ###Sign In User
@@ -14,9 +14,17 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-    "email":"osama@xord.com",
+    "email":"saa@xord.com",
     "password":"saad1"
 }
+###Sign Out User
+
+POST http://localhost:3000/auth/signout
+
+###Who Am I
+
+GET http://localhost:3000/auth/whoami
+
 
 
 ###Get a particular User
@@ -39,4 +47,21 @@ Content-Type: application/json
 }
 
 ###Set The Color
-GET http://localhost:3000/colors/red
+GET http://localhost:3000/auth/colors/
+
+
+###CREARTE REPORT
+
+POST http://localhost:3000/reports
+Content-Type: application/json
+
+{
+    "make":"toyota",
+    "model":"corolla",
+    "year":1980,
+    "mileage":10000,
+    "lng":0,
+    "lat":0,
+    "price":50000
+
+}
