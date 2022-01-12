@@ -35,5 +35,7 @@ export class ReportsController {
     return this.reportsService.changeApproval(id, body.approved);
   }
   @Get()
-  getEstimateDto(@Query() query: GetEstimateDto) {}
+  getEstimateDto(@Query() query: GetEstimateDto) {
+    return this.reportsService.calculateEstimate(query);
+  }
 }
