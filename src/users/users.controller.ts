@@ -12,7 +12,7 @@ import {
   UseGuards,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { UpdateUserDto } from 'src/dtos/update-user-dto';
+import { UpdateUserDto } from '../dtos/update-user-dto';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
@@ -21,16 +21,16 @@ import {
   SerializerInterceptor,
   Serialize,
 } from '../interceptors/serialize.interceptor';
-import { UserDto } from 'src/dtos/user-dto';
+import { UserDto } from '../dtos/user-dto';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptors';
 import { User } from './user.entity';
-import { AuthGuard } from 'src/guards/auth.guards';
+import { AuthGuard } from '../guards/auth.guards';
 @Controller('auth')
 @Serialize(UserDto) //custom interceptors
 export class UsersController {
   constructor(
     private usersService: UsersService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
   @Post('/signup')
   async createUser(@Body() body: CreateUserDto, @Session() session: any) {
